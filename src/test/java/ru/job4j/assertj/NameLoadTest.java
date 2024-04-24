@@ -12,7 +12,7 @@ class NameLoadTest {
     @Test
     void checkEmpty() {
         NameLoad nameLoad = new NameLoad();
-        assertThatThrownBy(nameLoad::getMap)
+        assertThatThrownBy(() -> nameLoad.getMap())
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessageContaining("no data");
     }
@@ -32,5 +32,13 @@ class NameLoadTest {
         Map<String, String> result = new HashMap<>();
         result.put("key", "value");
         assertThat(result).isEqualTo(nameLoad.getMap());
+    }
+
+    @Test
+    void checkParseWithoutEqual() {
+        NameLoad nameLoad = new NameLoad();
+        assertThatThrownBy(() -> nameLoad.parse("key:value"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("does not contain the symbol");
     }
 }
