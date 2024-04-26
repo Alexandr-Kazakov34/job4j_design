@@ -41,4 +41,18 @@ class NameLoadTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("does not contain the symbol");
     }
+    @Test
+    void checkParseStartWithEqual() {
+        NameLoad nameLoad = new NameLoad();
+        assertThatThrownBy(() -> nameLoad.parse("=key=value"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("does not contain a key");
+    }
+    @Test
+    void checkParseWithEqualEnd() {
+        NameLoad nameLoad = new NameLoad();
+        assertThatThrownBy(() -> nameLoad.parse("key.value="))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("does not contain a value");
+    }
 }
