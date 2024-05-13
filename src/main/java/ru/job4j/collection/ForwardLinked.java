@@ -41,6 +41,7 @@ public class ForwardLinked<E> implements Iterable<E> {
             throw new NoSuchElementException();
         }
         E item = head.item;
+        head.item = null;
         head = head.next;
         size--;
         modCount--;
@@ -61,6 +62,9 @@ public class ForwardLinked<E> implements Iterable<E> {
 
             @Override
             public boolean hasNext() {
+                if (modCount != expectedModCount) {
+                    throw new ConcurrentModificationException();
+                }
                 return currentNode != null;
             }
 
@@ -68,9 +72,6 @@ public class ForwardLinked<E> implements Iterable<E> {
             public E next() {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
-                }
-                if (modCount != expectedModCount) {
-                    throw new ConcurrentModificationException();
                 }
                 E item = currentNode.item;
                 currentNode = currentNode.next;
