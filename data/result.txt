@@ -1,0 +1,5 @@
+Hello, world!
+Some string
+10
+1,500000
+Puk355,800000
