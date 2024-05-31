@@ -32,7 +32,9 @@ public class LogFilter {
         try (PrintWriter printWriter = new PrintWriter(
                 new BufferedOutputStream(
                         new FileOutputStream(out)))) {
-            printWriter.println(data);
+            for (String string : data) {
+                printWriter.println(string);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
