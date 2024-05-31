@@ -40,8 +40,29 @@ class ConfigTest {
     }
 
     @Test
-    void whenPairWithoutKeyIfValueIfEqualIfOnlyEqual() {
-        String path = "./data/pair_without_key_value_equal.properties";
+    void whenPairWithoutKey() {
+        String path = "./data/pair_without_key.properties";
+        Config config = new Config(path);
+        assertThatThrownBy(config::load).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void whenPairWithoutValue() {
+        String path = "./data/pair_without_value.properties";
+        Config config = new Config(path);
+        assertThatThrownBy(config::load).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void whenPairWithoutEqual() {
+        String path = "./data/pair_without_equal.properties";
+        Config config = new Config(path);
+        assertThatThrownBy(config::load).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void whenPairOnlyEqual() {
+        String path = "./data/pair_only_equal.properties";
         Config config = new Config(path);
         assertThatThrownBy(config::load).isInstanceOf(IllegalArgumentException.class);
     }
