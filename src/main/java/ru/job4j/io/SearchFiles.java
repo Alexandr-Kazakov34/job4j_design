@@ -10,9 +10,11 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class SearchFiles implements FileVisitor<Path> {
+    private Predicate<Path> condition;
     private List<Path> paths;
 
     public SearchFiles(Predicate<Path> condition) {
+        this.condition = condition;
         paths = new ArrayList<>();
     }
 
@@ -27,7 +29,7 @@ public class SearchFiles implements FileVisitor<Path> {
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-        if (file.getFileName().toString().endsWith(".js")) {
+        if (condition.test(file) && file.getFileName().toString().endsWith(".js")) {
             paths.add(file);
         }
         return FileVisitResult.CONTINUE;
