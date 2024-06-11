@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import static org.assertj.core.api.Assertions.*;
 
 class AnalysisTest {
+
     @Test
     void whenOnePeriod(@TempDir Path tempDir) throws IOException {
         File source = tempDir.resolve("source.txt").toFile();
