@@ -20,7 +20,7 @@ class AnalysisTest {
             printWriter.println("400 11:01:02");
             printWriter.println("300 11:02:02");
         }
-        File target = tempDir.resolve("source.txt").toFile();
+        File target = tempDir.resolve("target.csv").toFile();
         Analysis analysis = new Analysis();
         analysis.unavailable(source.getAbsolutePath(), target.getAbsolutePath());
 
@@ -41,7 +41,7 @@ class AnalysisTest {
             printWriter.println("500 11:01:02");
             printWriter.println("200 11:02:02");
         }
-        File target = tempDir.resolve("source.txt").toFile();
+        File target = tempDir.resolve("target.csv").toFile();
         Analysis analysis = new Analysis();
         analysis.unavailable(source.getAbsolutePath(), target.getAbsolutePath());
 
