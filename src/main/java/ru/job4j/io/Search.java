@@ -1,5 +1,6 @@
 package ru.job4j.io;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -25,8 +26,16 @@ public class Search {
         if (args.length == 0) {
             throw new IllegalArgumentException("Root folder is null. Usage  ROOT_FOLDER.");
         }
-        if (args.length == 1) {
-            throw new IllegalArgumentException("File extension is null");
+        File file = new File(args[0]);
+        if (!file.exists()) {
+            throw new IllegalArgumentException(String.format("the %s doesnt exist", file.getAbsoluteFile()));
+        }
+        if (!file.isDirectory()) {
+            throw new IllegalArgumentException(String.format("The %s isn't directory", file.getAbsoluteFile()));
+        }
+        String arg = args[1];
+        if (!arg.startsWith(".")) {
+            throw new IllegalArgumentException("Do not correct type file");
         }
         return true;
     }
