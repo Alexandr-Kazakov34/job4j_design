@@ -28,7 +28,7 @@ public class Zip {
         if (keyValue.get("d").isBlank() || keyValue.get("e").isBlank() || keyValue.get("o").isBlank()) {
             throw new IllegalArgumentException("Missing some arguments");
         }
-        if (!Files.isDirectory(Paths.get(keyValue.get("d")))) {
+        if (!Files.isDirectory(Path.of(keyValue.get("d")))) {
             throw new IllegalArgumentException("Do not correct path");
         }
         if (!keyValue.get("e").startsWith(".")) {
@@ -54,9 +54,10 @@ public class Zip {
     public static void main(String[] args) throws IOException {
         if (check(args)) {
             String sourceDirectory = ArgsName.of(args).get("d");
+            String exclude = ArgsName.of(args).get("e");
             String targetZipFile = ArgsName.of(args).get("o");
             Path sourcePath = Paths.get(sourceDirectory);
-            List<Path> searchFiles = Search.search(sourcePath, path -> true);
+            List<Path> searchFiles = Search.search(sourcePath, path -> !path.toFile().getName().endsWith(exclude));
             Zip zip = new Zip();
             zip.packFiles(searchFiles, new File(targetZipFile));
             zip.packSingleFile(
