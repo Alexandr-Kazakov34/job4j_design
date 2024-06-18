@@ -22,9 +22,10 @@ public class ConsoleChat {
         boolean isMute = true;
         ArrayList<String> log = new ArrayList<>();
         Random random = new Random();
+        List<String> phrases = readPhrases();
         try (BufferedReader input = new BufferedReader(new InputStreamReader(System.in))) {
             while (isRunning) {
-                String phrase = readPhrases().get(random.nextInt(readPhrases().size()));
+                String phrase = phrases.get(random.nextInt(phrases.size()));
                 String userInput = input.readLine();
                 log.add(userInput);
                 if (OUT.equalsIgnoreCase(userInput)) {
