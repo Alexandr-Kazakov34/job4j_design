@@ -24,20 +24,20 @@ public class ConsoleChat {
         Random random = new Random();
         try (BufferedReader input = new BufferedReader(new InputStreamReader(System.in))) {
             while (isRunning) {
+                String phrase = readPhrases().get(random.nextInt(readPhrases().size()));
                 String userInput = input.readLine();
                 log.add(userInput);
-                if (userInput.equalsIgnoreCase(OUT)) {
+                if (OUT.equalsIgnoreCase(userInput)) {
                     isRunning = false;
                 }
-                if (userInput.equalsIgnoreCase(STOP)) {
+                if (STOP.equalsIgnoreCase(userInput)) {
                     isMute = false;
                 }
-                if (userInput.equalsIgnoreCase(CONTINUE)) {
+                if (CONTINUE.equalsIgnoreCase(userInput)) {
                     isMute = true;
                 }
                 if (isMute) {
-                    int intRandom2 = random.nextInt(readPhrases().size());
-                    System.out.println(readPhrases().get(intRandom2));
+                    System.out.println(phrase);
                 }
                 saveLog(log);
             }
