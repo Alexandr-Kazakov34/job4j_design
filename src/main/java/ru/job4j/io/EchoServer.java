@@ -10,16 +10,32 @@ public class EchoServer {
             while (!server.isClosed()) {
                 Socket socket = server.accept();
                 try (OutputStream output = socket.getOutputStream();
-                     BufferedReader input = new BufferedReader(
-                             new InputStreamReader(socket.getInputStream()))) {
+                     BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
                     output.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
-                    String request = input.readLine();
-                    boolean check = request.contains("msg=Bye");
-                    for (String string = input.readLine(); string != null && !string.isEmpty(); string = input.readLine()) {
-                        System.out.println(string);
+                    String requestLine = input.readLine();
+                    boolean shouldCloseServer = false;
+                    String response = "";
+
+                    if (requestLine != null && !requestLine.isEmpty()) {
+                        if (requestLine.contains("msg=Hello")) {
+                            response = "Hello, dear friend.";
+                        } else if (requestLine.contains("msg=Exit")) {
+                            shouldCloseServer = true;
+                        } else if (requestLine.contains("msg=")) {
+                            int startIndex = requestLine.indexOf("msg=") + 4;
+                            int endIndex = requestLine.indexOf(" ", startIndex);
+                            response = requestLine.substring(startIndex, endIndex);
+                        }
                     }
+
+                    output.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
+                    output.write(response.getBytes());
                     output.flush();
-                    if (check) {
+
+                    for (String line = requestLine; line != null && !line.isEmpty(); line = input.readLine()) {
+                        System.out.println(line);
+                    }
+                    if (shouldCloseServer) {
                         server.close();
                     }
                 }
