@@ -25,7 +25,7 @@ public class CSVReader {
             throw new IllegalArgumentException("the path parameter must have the extension .csv");
         }
         String delimiter = argsName.get("delimiter");
-        if (!delimiter.equals(";") && !delimiter.equals(",")) {
+        if (!";".equals(delimiter) && !",".equals(delimiter)) {
             throw new IllegalArgumentException("as delimiter use \";\" or \",\"");
         }
         String filter = argsName.get("filter");
