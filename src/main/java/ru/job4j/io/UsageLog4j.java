@@ -13,10 +13,12 @@ public class UsageLog4j {
         LOG.info("info message");
         LOG.warn("warn message");
         LOG.error("error message");
+        System.out.println();
 
         String name = "Petr Arsentev";
         int age = 33;
         LOG.debug("User info name : {}, age : {}", name, age);
+        System.out.println();
 
         int intValue = 10;
         long longValue = 100000000000L;
@@ -29,6 +31,13 @@ public class UsageLog4j {
 
         LOG.debug("int: {}, long: {}, float: {}, double: {}, char: {}, boolean: {}, byte: {}, short: {}",
                 intValue, longValue, floatValue, doubleValue, charValue, booleanValue, byteValue, shortValue);
+        System.out.println();
+
+        try {
+            throw new Exception("Not supported code");
+        } catch (Exception e) {
+            LOG.error("Exception in log example", e);
+        }
     }
 }
 
