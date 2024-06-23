@@ -24,4 +24,12 @@ public class PersonJson {
                 + ", statuses=" + Arrays.toString(statuses)
                 + '}';
     }
+
+    public boolean isSex() {
+        return sex;
+    }
+
+    public int getAge() {
+        return age;
+    }
 }
