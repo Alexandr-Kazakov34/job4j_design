@@ -3,7 +3,7 @@ package ru.job4j.serialization.json;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-public class Remain {
+public class MainJson {
     public static void main(String[] args) {
         final Worker worker = new Worker(false, 35, new Phone("911"),
                 new String[]{"handyman", "carpenter", "foreman"});

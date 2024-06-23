@@ -2,11 +2,10 @@ package ru.job4j.serialization.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import ru.job4j.serialization.java.Contact;
 
 public class Main {
     public static void main(String[] args) {
-        final Person person = new Person(false, 30, new ContactPhone("11-111"),
+        final PersonJson person = new PersonJson(false, 30, new ContactPhone("11-111"),
                 new String[] {"Worker", "Married"});
 
         /* Преобразуем объект person в json-строку. */
@@ -26,7 +25,7 @@ public class Main {
                         + "[\"Student\",\"Free\"]"
                         + "}";
         /* Превращаем json-строку обратно в объект */
-        final Person personMod = gson.fromJson(personJson, Person.class);
+        final PersonJson personMod = gson.fromJson(personJson, PersonJson.class);
         System.out.println(personMod);
     }
 }
