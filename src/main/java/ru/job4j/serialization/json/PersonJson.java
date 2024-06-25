@@ -32,4 +32,13 @@ public class PersonJson {
     public int getAge() {
         return age;
     }
+
+
+    public String[] getStatuses() {
+        return statuses;
+    }
+
+    public ContactPhone getContactPhone() {
+        return contactPhone;
+    }
 }

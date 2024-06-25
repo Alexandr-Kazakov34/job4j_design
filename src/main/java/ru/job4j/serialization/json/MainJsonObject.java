@@ -4,18 +4,19 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainJsonObject {
     public static void main(String[] args) {
         JSONObject jsonContactPhone = new JSONObject("{\"contactPhone\":\"89911\"}");
 
-        ArrayList<String> list = new ArrayList<>();
+        List<String> list = new ArrayList<>();
         list.add("handyman");
         list.add("carpenter");
         list.add("foreman");
         JSONArray jsonStatus = new JSONArray(list);
 
-        final PersonJson personJson = new PersonJson(false, 35, new ContactPhone("5423523"),
+        final PersonJson personJson = new PersonJson(true, 30, new ContactPhone("5423523"),
                 new String[]{"Handyman", "Carpenter", "Foreman"});
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("gender", personJson.isSex());
