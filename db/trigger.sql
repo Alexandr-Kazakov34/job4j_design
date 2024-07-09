@@ -24,9 +24,7 @@ or replace function taxes_row()
 returns trigger as
 $$
 BEGIN
-update products
-set price = price + price * 0.13
-where id = new.id;
+NEW.price = NEW.price + NEW.price * 0.13;
 return NEW;
 END;
 $$
